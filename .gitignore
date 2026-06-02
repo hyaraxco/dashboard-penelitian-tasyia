@@ -1,0 +1,16 @@
+# macOS system files (sangat relevan karena file .DS_Store sudah ada di folder Anda)
+.DS_Store
+.DS_Store?
+._*
+
+# Konfigurasi IDE / Text Editor (relevan jika Anda menggunakan VS Code atau WebStorm)
+.vscode/
+.idea/
+*.suo
+*.swp
+
+# Integrasi AI & Cache IDE (menjaga agar folder generator/cache lokal tidak ikut ter-push)
+.gemini/
+.antigravity/
+.antigravityignore
+.system_generated/

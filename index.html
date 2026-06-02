@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <meta
+      name="description"
+      content="Dashboard analisis penelitian hubungan stereotipe gender dan kecemasan karir mahasiswi teknik di Indonesia."
+    />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#0f0f14" />
+    <link rel="canonical" href="./" />
+    <meta property="og:title" content="Dashboard Penelitian - Stereotipe Gender & Kecemasan Karir" />
+    <meta property="og:description" content="Analisis data penelitian mahasiswi teknik dengan visual interaktif, tabel partisipan, dan insight utama." />
+    <meta property="og:type" content="website" />
+    <title>Penelitian - Stereotipe Gender & Kecemasan Karir</title>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Dashboard Penelitian - Stereotipe Gender & Kecemasan Karir",
+        "description": "Dashboard analisis data penelitian interaktif untuk hubungan stereotipe gender dan kecemasan karir mahasiswi teknik.",
+        "applicationCategory": "DataVisualizationApplication",
+        "operatingSystem": "Web browser",
+        "inLanguage": "id"
+      }
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header-bar">
+      <div class="header-container">
+        <div class="header-logo">
+          <div class="header-logo-icon">
+            <img src="assets/images/logo-undip-mail.png" alt="Logo Universitas Diponegoro" class="header-logo-img" decoding="async" />
+          </div>
+          <div class="header-text">
+            <div class="header-title">Dashboard Penelitian</div>
+            <span class="header-info mono">Natasyia Olivia Ramadhan | FPSI</span>
+            
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+            <svg id="icon-light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5" />
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+            <svg id="icon-dark" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span>Analisis Data Penelitian</span>
+          </div>
+          <h1>Hubungan Antara Stereotipe Gender Dengan Kecemasan Karir</h1>
+          <p>
+            Pada Mahasiswi Jurusan Teknik di Indonesia - Analisis data 30
+            partisipan angkatan 2023, usia 18-25 tahun.
+          </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="card fade-in stat-card">
+            <div class="stat-label">Partisipan</div>
+            <div class="stat-lg" data-count="30">0</div>
+          </div>
+          <div class="card fade-in stat-card">
+            <div class="stat-label">Jurusan</div>
+            <div class="stat-lg" data-count="7">0</div>
+          </div>
+          <div class="card fade-in stat-card">
+            <div class="stat-label">Pertanyaan</div>
+            <div class="stat-lg" data-count="64">0</div>
+          </div>
+          <div class="card fade-in stat-card">
+            <div class="stat-label">Data Points</div>
+            <div class="stat-lg" data-count="1920" data-format="thousands">
+              0
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main -->
+    <main id="main" class="container main-content">
+      <!-- Tabs -->
+      <div class="sticky-tabs" role="tablist" aria-label="Bagian analisis data">
+        <button
+          onclick="showSection('overview')"
+          id="tab-overview"
+          class="btn-tab btn-tab-active"
+          role="tab"
+          aria-selected="true"
+          aria-controls="section-overview"
+        >
+          Overview
+        </button>
+        <button
+          onclick="showSection('distribution')"
+          id="tab-distribution"
+          class="btn-tab btn-tab-inactive"
+          role="tab"
+          aria-selected="false"
+          aria-controls="section-distribution"
+        >
+          Distribusi
+        </button>
+        <button
+          onclick="showSection('personas')"
+          id="tab-personas"
+          class="btn-tab btn-tab-inactive"
+          role="tab"
+          aria-selected="false"
+          aria-controls="section-personas"
+        >
+          Partisipan
+        </button>
+        <button
+          onclick="showSection('analysis')"
+          id="tab-analysis"
+          class="btn-tab btn-tab-inactive"
+          role="tab"
+          aria-selected="false"
+          aria-controls="section-analysis"
+        >
+          Analisis
+        </button>
+      </div>
+
+      <!-- Section: Overview -->
+      <section id="section-overview" class="content-section" role="tabpanel" aria-labelledby="tab-overview">
+        <div class="charts-grid">
+          <div class="card fade-in chart-card">
+            <h2 class="section-title">Distribusi Partisipan</h2>
+            <div class="section-desc">Per jurusan berdasarkan rasio gender</div>
+            <div class="chart-frame chart-frame--sm">
+              <canvas id="chartJurusan" role="img" aria-label="Distribusi partisipan per jurusan"></canvas>
+            </div>
+          </div>
+          <div class="card fade-in chart-card">
+            <h2 class="section-title">Profil Kecemasan Karir</h2>
+            <div class="section-desc">8 dimensi per jurusan</div>
+            <div class="chart-frame chart-frame--sm">
+              <canvas id="chartRadar" role="img" aria-label="Profil kecemasan karir dan dimensi per jurusan"></canvas>
+            </div>
+          </div>
+          <div class="card fade-in chart-card full-width">
+            <h2 class="section-title">
+              Korelasi: Stereotip Gender vs Kecemasan Karir
+            </h2>
+            <div class="section-desc">Setiap titik = 1 partisipan</div>
+            <div class="chart-frame chart-frame--lg">
+              <canvas id="chartScatter" role="img" aria-label="Korelasi antara stereotip gender dan kecemasan karir setiap partisipan"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Distribution -->
+      <section
+        id="section-distribution"
+        class="content-section hidden"
+        role="tabpanel"
+        aria-labelledby="tab-distribution"
+      >
+        <div class="charts-grid">
+          <div class="card fade-in chart-card">
+            <h2 class="section-title">Rata-rata Kecemasan Karir</h2>
+            <div class="section-desc">
+              Skala 1-4 · Semakin tinggi = semakin cemas
+            </div>
+            <div class="chart-frame chart-frame--sm">
+              <canvas id="chartBarKecemasan" role="img" aria-label="Rata-rata kecemasan karir per jurusan"></canvas>
+            </div>
+          </div>
+          <div class="card fade-in chart-card">
+            <h2 class="section-title section-title--spaced">Ranking</h2>
+            <div id="rankingKecemasan"></div>
+          </div>
+          <div class="card fade-in chart-card">
+            <h2 class="section-title">Rata-rata Stereotip Gender</h2>
+            <div class="section-desc">
+              Skala 1-4 · Semakin tinggi = semakin setuju stereotip
+            </div>
+            <div class="chart-frame chart-frame--sm">
+              <canvas id="chartBarStereotip" role="img" aria-label="Rata-rata stereotip gender per jurusan"></canvas>
+            </div>
+          </div>
+          <div class="card fade-in chart-card">
+            <h2 class="section-title section-title--spaced">Ranking</h2>
+            <div id="rankingStereotip"></div>
+          </div>
+          <div class="card fade-in chart-card full-width">
+            <h2 class="section-title">Perbandingan Kecemasan vs Stereotip</h2>
+            <div class="section-desc">Per jurusan</div>
+            <div class="chart-frame chart-frame--sm">
+              <canvas id="chartGrouped" role="img" aria-label="Perbandingan kecemasan dan stereotip per jurusan"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Personas -->
+      <section
+        id="section-personas"
+        class="content-section hidden"
+        role="tabpanel"
+        aria-labelledby="tab-personas"
+      >
+        <!-- Filters -->
+        <div class="filters-container">
+          <div class="search-field-wrap">
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              aria-label="Cari nama atau latar belakang"
+              placeholder="Cari nama atau latar belakang..."
+              oninput="applyFilters()"
+            />
+            <button
+              id="clearSearchBtn"
+              onclick="clearSearchInput()"
+              class="search-clear-btn hidden"
+            >
+              ✕
+            </button>
+          </div>
+          <div class="filters-group">
+            <select
+              id="filterJurusan"
+              class="select-input"
+              aria-label="Filter jurusan"
+              onchange="applyFilters()"
+            >
+              <option value="all">Semua Jurusan</option>
+              <option value="Teknik Perkapalan">Perkapalan</option>
+              <option value="Teknik Sipil">Sipil</option>
+              <option value="Teknik Elektro">Elektro</option>
+              <option value="Teknik Komputer">Komputer</option>
+              <option value="Teknik Mesin">Mesin</option>
+              <option value="Teknik Industri">Industri</option>
+              <option value="Teknik Geologi">Geologi</option>
+            </select>
+            <select
+              id="filterKecemasan"
+              class="select-input"
+              aria-label="Filter kecemasan"
+              onchange="applyFilters()"
+            >
+              <option value="all">Semua Kecemasan</option>
+              <option value="low">Rendah (&lt; 2.3)</option>
+              <option value="mid">Sedang (2.3-2.6)</option>
+              <option value="high">Tinggi (&gt; 2.6)</option>
+            </select>
+            <select
+              id="filterStereotip"
+              class="select-input"
+              aria-label="Filter stereotip"
+              onchange="applyFilters()"
+            >
+              <option value="all">Semua Stereotip</option>
+              <option value="low">Rendah (&lt; 2.3)</option>
+              <option value="mid">Sedang (2.3-2.6)</option>
+              <option value="high">Tinggi (&gt; 2.6)</option>
+            </select>
+            <select id="sortBy" class="select-input" aria-label="Urutkan data" onchange="applyFilters()">
+              <option value="id">Urut: ID</option>
+              <option value="nama">Urut: Nama</option>
+              <option value="kecemasan-desc">Urut: Kecemasan Tertinggi</option>
+              <option value="kecemasan-asc">Urut: Kecemasan Terendah</option>
+              <option value="stereotip-desc">Urut: Stereotip Tertinggi</option>
+              <option value="stereotip-asc">Urut: Stereotip Terendah</option>
+            </select>
+            <button id="clearAllBtn" onclick="clearAllFilters()" class="clear-action-btn hidden">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="card table-card">
+          <div class="table-container">
+            <table class="table-base">
+              <caption class="sr-only">Daftar partisipan dengan jurusan, usia, skor kecemasan, skor stereotip, dan faktor pendukung.</caption>
+              <thead>
+                <tr class="table-head-row">
+                  <th scope="col" class="table-cell table-head-cell table-head-cell--center table-head-cell--narrow">
+                    No
+                  </th>
+                  <th scope="col" class="table-cell table-head-cell table-head-cell--left table-head-cell--sortable" onclick="sortBy('nama')" tabindex="0" role="button" onkeydown="if(event.key==='Enter' || event.key===' ') { event.preventDefault(); sortBy('nama'); }">
+                    Nama
+                  </th>
+                  <th scope="col" class="table-cell table-head-cell table-head-cell--left table-head-cell--sortable" onclick="sortBy('jurusan')" tabindex="0" role="button" onkeydown="if(event.key==='Enter' || event.key===' ') { event.preventDefault(); sortBy('jurusan'); }">
+                    Jurusan
+                  </th>
+                  <th scope="col" class="table-cell table-head-cell table-head-cell--center">
+                    Usia
+                  </th>
+                  <th scope="col" class="table-cell table-head-cell table-head-cell--center table-head-cell--sortable" onclick="sortBy('kecemasan')" tabindex="0" role="button" onkeydown="if(event.key==='Enter' || event.key===' ') { event.preventDefault(); sortBy('kecemasan'); }">
+                    Kecemasan
+                  </th>
+                  <th scope="col" class="table-cell table-head-cell table-head-cell--center table-head-cell--sortable" onclick="sortBy('stereotip')" tabindex="0" role="button" onkeydown="if(event.key==='Enter' || event.key===' ') { event.preventDefault(); sortBy('stereotip'); }">
+                    Stereotip
+                  </th>
+                  <th scope="col" class="table-cell table-head-cell table-head-cell--left">
+                    Faktor Kampus
+                  </th>
+                  <th scope="col" class="table-cell table-head-cell table-head-cell--left">
+                    Faktor Luar
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="personaTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="bottom-controls">
+          <div class="bottom-controls-left">
+            <span id="filterCount" class="text-12-muted" aria-live="polite"></span>
+            <div class="per-page-selector">
+              <span class="select-label">Tampilkan:</span>
+              <select
+                id="itemsPerPageSelect"
+                class="select-input per-page-select-desktop"
+                aria-label="Jumlah partisipan per halaman"
+                onchange="changeItemsPerPage(this.value)"
+              >
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+          </div>
+          <div id="paginationControls" class="pagination-controls" aria-label="Pagination"></div>
+        </div>
+
+        <!-- Detail Panel -->
+        <div id="personaDetail" class="card card-panel hidden">
+          <div id="personaDetailContent"></div>
+        </div>
+      </section>
+
+      <!-- Section: Analysis -->
+      <section
+        id="section-analysis"
+        class="content-section hidden"
+        role="tabpanel"
+        aria-labelledby="tab-analysis"
+      >
+        <div class="charts-grid">
+          <div class="card fade-in chart-card">
+            <h2 class="section-title section-title--spaced">
+              Temuan Utama
+            </h2>
+            <div class="content-stack">
+              <div class="finding-note">
+                <div class="finding-note-row">
+                  <span class="finding-note-number">1</span>
+                  <div class="finding-note-title">Korelasi Positif</div>
+                </div>
+                <div class="finding-note-text">
+                  Semakin tinggi stereotip gender yang diterima, semakin tinggi
+                  kecemasan karir yang dialami.
+                </div>
+              </div>
+              <div class="finding-note">
+                <div class="finding-note-row">
+                  <span class="finding-note-number">2</span>
+                  <div class="finding-note-title">Jurusan dengan Gap Gender Besar</div>
+                </div>
+                <div class="finding-note-text">
+                  Perkapalan, Sipil, dan Elektro menunjukkan tingkat stereotip
+                  dan kecemasan lebih tinggi.
+                </div>
+              </div>
+              <div class="finding-note">
+                <div class="finding-note-row">
+                  <span class="finding-note-number">3</span>
+                  <div class="finding-note-title">Pengaruh Faktor Internal &amp; Eksternal</div>
+                </div>
+                <div class="finding-note-text">
+                  Faktor kampus (organisasi, magang, dosen) dan faktor luar
+                  (keluarga, ekonomi) sama-sama berpengaruh signifikan.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card fade-in chart-card">
+            <h2 class="section-title">Kategori Kecemasan</h2>
+            <div class="section-desc">
+              Distribusi tingkat kecemasan seluruh partisipan
+            </div>
+            <div class="chart-frame chart-frame--md">
+              <canvas id="chartDoughnut" role="img" aria-label="Distribusi kategori kecemasan partisipan"></canvas>
+            </div>
+          </div>
+          <div class="card fade-in chart-card full-width">
+            <h2 class="section-title">Dimensi Stereotip per Jurusan</h2>
+            <div class="section-desc">
+              Warna lebih gelap = skor lebih tinggi
+            </div>
+            <div class="overflow-x-auto mt-20">
+              <div id="heatmapContainer"></div>
+            </div>
+            <div id="heatmapLegend"></div>
+          </div>
+          <div class="card fade-in chart-card full-width">
+            <h2 class="section-title section-title--spaced">
+              Rekomendasi
+            </h2>
+            <div class="recommendations-grid">
+              <div class="reco-card">
+                <div
+                  class="reco-title"
+                >
+                  Program Mentoring
+                </div>
+                <div
+                  class="reco-text"
+                >
+                  Buatkan program mentoring dengan role model perempuan di
+                  bidang teknik untuk mengurangi stereotip.
+                </div>
+              </div>
+              <div class="reco-card">
+                <div
+                  class="reco-title"
+                >
+                  Magang Inklusif
+                </div>
+                <div
+                  class="reco-text"
+                >
+                  Kerjasama dengan perusahaan yang mendukung kesetaraan gender
+                  untuk program magang.
+                </div>
+              </div>
+              <div class="reco-card">
+                <div
+                  class="reco-title"
+                >
+                  Workshop Kesadaran
+                </div>
+                <div
+                  class="reco-text"
+                >
+                  Workshop untuk dosen dan mahasiswa tentang unconscious bias
+                  dan stereotip gender.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+      <div class="footer-blur-orb" id="footerBlurOrb"></div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-main">
+            <span class="footer-text-premium">Craft with <3 Tasyia</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Footer blur orb follows pointer/touch
+      document.addEventListener('DOMContentLoaded', function() {
+        const footer = document.getElementById('footer');
+        const blurOrb = document.getElementById('footerBlurOrb');
+
+        if (!footer || !blurOrb) return;
+
+        let animationId = null;
+        let isActive = false;
+        let targetX = 0;
+        let targetY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        function orbSize() {
+          return blurOrb.offsetWidth || 200;
+        }
+
+        function stopOrb() {
+          isActive = false;
+          blurOrb.style.opacity = '0';
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+          }
+        }
+
+        function animateOrb() {
+          if (!isActive) {
+            animationId = null;
+            return;
+          }
+
+          currentX += (targetX - currentX) * 0.15;
+          currentY += (targetY - currentY) * 0.15;
+          blurOrb.style.transform = 'translate(' + currentX + 'px, ' + currentY + 'px)';
+          animationId = requestAnimationFrame(animateOrb);
+        }
+
+        function startOrb(clientX, clientY) {
+          const rect = footer.getBoundingClientRect();
+          targetX = clientX - rect.left - orbSize() / 2;
+          targetY = clientY - rect.top - orbSize() / 2;
+
+          if (!isActive) {
+            currentX = targetX;
+            currentY = targetY;
+            isActive = true;
+            blurOrb.style.opacity = '1';
+            animateOrb();
+            return;
+          }
+
+          blurOrb.style.opacity = '1';
+        }
+
+        function handlePoint(clientX, clientY, stopIfOutside = true) {
+          const rect = footer.getBoundingClientRect();
+          const inside = clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom;
+
+          if (!inside) {
+            if (stopIfOutside) stopOrb();
+            return;
+          }
+
+          startOrb(clientX, clientY);
+        }
+
+        window.addEventListener('mousemove', function(e) {
+          handlePoint(e.clientX, e.clientY, true);
+        });
+
+        window.addEventListener('pointermove', function(e) {
+          if (e.pointerType === 'touch') return;
+          handlePoint(e.clientX, e.clientY, true);
+        });
+
+        window.addEventListener('touchstart', function(e) {
+          const touch = e.touches[0];
+          if (!touch) return;
+          handlePoint(touch.clientX, touch.clientY, false);
+        }, { passive: true });
+
+        window.addEventListener('touchmove', function(e) {
+          const touch = e.touches[0];
+          if (!touch) return;
+          handlePoint(touch.clientX, touch.clientY, true);
+        }, { passive: true });
+
+        window.addEventListener('touchend', function() {
+          setTimeout(stopOrb, 120);
+        }, { passive: true });
+
+        window.addEventListener('touchcancel', stopOrb, { passive: true });
+        window.addEventListener('blur', stopOrb);
+      });
+    </script>
+
+    <!-- Data -->
+    <script src="data/personas.js" defer></script>
+    
+    <!-- JavaScript Modules -->
+    <script src="js/theme.js" defer></script>
+    <script src="js/tabs.js" defer></script>
+    <script src="js/filters.js" defer></script>
+    <script src="js/table.js" defer></script>
+    <script src="js/detail.js" defer></script>
+    <script src="js/charts.js" defer></script>
+    <script src="js/heatmap.js" defer></script>
+    <script src="js/rankings.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </body>
+</html>
