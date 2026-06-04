@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Show default section (overview)
   showSection("overview");
+
+  // Reveal hero stats independently of tab content animations
+  setTimeout(() => {
+    document.querySelectorAll(".stats-grid .fade-in").forEach((el) => {
+      el.classList.add("visible");
+    });
+  }, 100);
   
   // Create overview charts (other charts will be created when their tab is shown)
   chartInstances.jurusan = createJurusanChart();

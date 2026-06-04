@@ -14,13 +14,14 @@ const shortMap = new Map(Object.entries(SHORT));
 
 // Store chart instances for later updates
 const chartInstances = {};
+let isAnimatingCharts = false;
 
 function isCompactChartLayout() {
   return window.innerWidth < 768;
 }
 
-function legendPosition(desktopPosition = "right") {
-  return isCompactChartLayout() ? "bottom" : desktopPosition;
+function legendPosition(desktopPosition = "right", compactPosition = "bottom") {
+  return isCompactChartLayout() ? compactPosition : desktopPosition;
 }
 
 function formatAvg(value) {
@@ -91,20 +92,24 @@ function forceChartResize() {
 
 /**
  * Animate chart when its tab becomes visible
- * Destroys and recreates the chart to replay animation
+ * Destroys and recreates the chart to replay animation.
  */
 function animateChartOnVisible(chartKey, createFn) {
   if (chartInstances[chartKey]) {
     chartInstances[chartKey].destroy();
     chartInstances[chartKey] = null;
   }
+  isAnimatingCharts = true;
   chartInstances[chartKey] = createFn();
 
-  // Force resize after creation so Chart.js reads settled container width
   requestAnimationFrame(function () {
     if (chartInstances[chartKey]) {
       chartInstances[chartKey].resize();
     }
+    // Allow ResizeObserver to fire again after animation settles
+    setTimeout(function () {
+      isAnimatingCharts = false;
+    }, 100);
   });
 }
 
@@ -139,7 +144,7 @@ function createJurusanChart() {
         duration: 1500,
         easing: "easeOutCubic",
       },
-      plugins: { legend: { position: legendPosition("right") } },
+      plugins: { legend: { position: legendPosition("right", "right") } },
     },
   });
 
@@ -188,7 +193,7 @@ function createRadarChart() {
         duration: 1500,
         easing: "easeOutCubic",
       },
-      plugins: { legend: { position: legendPosition("right") } },
+      plugins: { legend: { position: legendPosition("right", "right") } },
       scales: {
         r: {
           min: 1.5,
@@ -448,7 +453,8 @@ function createKategoriChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      cutout: "65%",
+      radius: "86%",
+      cutout: "70%",
       animation: {
         animateRotate: true,
         animateScale: true,
@@ -472,18 +478,9 @@ function createKategoriChart() {
 // Trigger Chart.js resize on window resize so canvases reflow
 let chartResizeTimer = null;
 window.addEventListener("resize", function () {
+  if (isAnimatingCharts) return;
   clearTimeout(chartResizeTimer);
   chartResizeTimer = setTimeout(function () {
     forceChartResize();
   }, 150);
 });
-
-// ResizeObserver: reflow charts when their frame container changes size
-if (typeof ResizeObserver !== "undefined") {
-  document.querySelectorAll(".chart-frame").forEach(function (frame) {
-    var observer = new ResizeObserver(function () {
-      forceChartResize();
-    });
-    observer.observe(frame);
-  });
-}

@@ -20,50 +20,39 @@ function createRankings() {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.textContent = ""; // Clear existing secure
+    container.className = "ranking-list";
 
     sorted.forEach(([j, d], i) => {
       const val = key === "kecemasan" ? d.kecemasan : d.stereotip;
       const badge = val >= 2.6 ? "high" : val >= 2.3 ? "mid" : "low";
 
       const item = document.createElement("div");
-      item.style.display = "flex";
-      item.style.alignItems = "center";
-      item.style.gap = "12px";
-      item.style.padding = "12px 0";
-      if (i < sorted.length - 1) {
-        item.style.borderBottom = "1px solid var(--inset-border)";
-      }
+      item.className = "ranking-item";
+      if (i < 3) item.setAttribute("data-rank-top", "");
 
       const numDiv = document.createElement("div");
-      numDiv.className = "mono";
-      numDiv.style.fontSize = "18px";
-      numDiv.style.fontWeight = "600";
-      numDiv.style.color = "var(--text-muted)";
-      numDiv.style.width = "24px";
+      numDiv.className = "mono ranking-rank";
       numDiv.textContent = (i + 1).toString();
       item.appendChild(numDiv);
 
       const contentDiv = document.createElement("div");
-      contentDiv.style.flex = "1";
+      contentDiv.className = "ranking-content";
 
       const titleDiv = document.createElement("div");
-      titleDiv.style.fontSize = "13px";
-      titleDiv.style.fontWeight = "500";
+      titleDiv.className = "ranking-title";
       titleDiv.textContent = shortMap.get(j) || j;
       contentDiv.appendChild(titleDiv);
 
       const valDiv = document.createElement("div");
-      valDiv.className = "mono";
-      valDiv.style.fontSize = "16px";
-      valDiv.style.fontWeight = "600";
-      valDiv.style.color = colorsMap.get(j) || "";
+      valDiv.className = "mono ranking-value";
+      valDiv.style.setProperty("--ranking-accent", colorsMap.get(j) || "var(--text-primary)");
       valDiv.textContent = val.toFixed(2);
       contentDiv.appendChild(valDiv);
 
       item.appendChild(contentDiv);
 
       const badgeSpan = document.createElement("span");
-      badgeSpan.className = `badge badge-${badge}`;
+      badgeSpan.className = `badge badge-${badge} ranking-badge`;
       badgeSpan.textContent = badge === "high" ? "Tinggi" : badge === "mid" ? "Sedang" : "Rendah";
       item.appendChild(badgeSpan);
 

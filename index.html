@@ -13,6 +13,7 @@
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0f0f14" />
     <link rel="canonical" href="./" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta property="og:title" content="Dashboard Penelitian - Stereotipe Gender & Kecemasan Karir" />
     <meta property="og:description" content="Analisis data penelitian mahasiswi teknik dengan visual interaktif, tabel partisipan, dan insight utama." />
     <meta property="og:type" content="website" />
@@ -54,7 +55,7 @@
     <!-- Header -->
     <header class="header-bar">
       <div class="header-container">
-        <div class="header-logo">
+        <div class="header-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" role="button" tabindex="0" aria-label="Kembali ke atas" onkeydown="if(event.key==='Enter')window.scrollTo({top:0,behavior:'smooth'})">
           <div class="header-logo-icon">
             <img src="assets/images/logo-undip-mail.png" alt="Logo Universitas Diponegoro" class="header-logo-img" decoding="async" />
           </div>
@@ -87,29 +88,31 @@
           </div>
           <h1>Hubungan Antara Stereotipe Gender Dengan Kecemasan Karir</h1>
           <p>
-            Pada Mahasiswi Jurusan Teknik di Indonesia - Analisis data 30
-            partisipan angkatan 2023, usia 18-25 tahun.
+            Studi kuantitatif pada 30 mahasiswi jurusan teknik di Indonesia
+            (angkatan 2023, rentang usia 18–25 tahun) yang menganalisis
+            korelasi antara persepsi stereotip gender dengan tingkat
+            kecemasan karir.
           </p>
         </div>
 
         <!-- Stats -->
         <div class="stats-grid">
-          <div class="card fade-in stat-card">
+          <div class="card fade-in stat-card visible">
             <div class="stat-label">Partisipan</div>
-            <div class="stat-lg" data-count="30">0</div>
+            <div class="stat-lg" data-count="30">30</div>
           </div>
-          <div class="card fade-in stat-card">
+          <div class="card fade-in stat-card visible">
             <div class="stat-label">Jurusan</div>
-            <div class="stat-lg" data-count="7">0</div>
+            <div class="stat-lg" data-count="7">7</div>
           </div>
-          <div class="card fade-in stat-card">
+          <div class="card fade-in stat-card visible">
             <div class="stat-label">Pertanyaan</div>
-            <div class="stat-lg" data-count="64">0</div>
+            <div class="stat-lg" data-count="64">64</div>
           </div>
-          <div class="card fade-in stat-card">
+          <div class="card fade-in stat-card visible">
             <div class="stat-label">Data Points</div>
             <div class="stat-lg" data-count="1920" data-format="thousands">
-              0
+              1.920
             </div>
           </div>
         </div>
@@ -165,21 +168,21 @@
       <!-- Section: Overview -->
       <section id="section-overview" class="content-section" role="tabpanel" aria-labelledby="tab-overview">
         <div class="charts-grid">
-          <div class="card fade-in chart-card">
+          <div class="card fade-in chart-card chart-card--compact">
             <h2 class="section-title">Distribusi Partisipan</h2>
             <div class="section-desc">Per jurusan berdasarkan rasio gender</div>
             <div class="chart-frame chart-frame--sm">
               <canvas id="chartJurusan" role="img" aria-label="Distribusi partisipan per jurusan"></canvas>
             </div>
           </div>
-          <div class="card fade-in chart-card">
+          <div class="card fade-in chart-card chart-card--compact">
             <h2 class="section-title">Profil Kecemasan Karir</h2>
             <div class="section-desc">8 dimensi per jurusan</div>
             <div class="chart-frame chart-frame--sm">
               <canvas id="chartRadar" role="img" aria-label="Profil kecemasan karir dan dimensi per jurusan"></canvas>
             </div>
           </div>
-          <div class="card fade-in chart-card full-width">
+          <div class="card fade-in chart-card chart-card--compact full-width">
             <h2 class="section-title">
               Korelasi: Stereotip Gender vs Kecemasan Karir
             </h2>
@@ -199,7 +202,7 @@
         aria-labelledby="tab-distribution"
       >
         <div class="charts-grid">
-          <div class="card fade-in chart-card">
+          <div class="card fade-in chart-card chart-card--compact">
             <h2 class="section-title">Rata-rata Kecemasan Karir</h2>
             <div class="section-desc">
               Skala 1-4 · Semakin tinggi = semakin cemas
@@ -208,11 +211,11 @@
               <canvas id="chartBarKecemasan" role="img" aria-label="Rata-rata kecemasan karir per jurusan"></canvas>
             </div>
           </div>
-          <div class="card fade-in chart-card">
+          <div class="card fade-in chart-card chart-card--compact ranking-card">
             <h2 class="section-title section-title--spaced">Ranking</h2>
             <div id="rankingKecemasan"></div>
           </div>
-          <div class="card fade-in chart-card">
+          <div class="card fade-in chart-card chart-card--compact">
             <h2 class="section-title">Rata-rata Stereotip Gender</h2>
             <div class="section-desc">
               Skala 1-4 · Semakin tinggi = semakin setuju stereotip
@@ -221,11 +224,11 @@
               <canvas id="chartBarStereotip" role="img" aria-label="Rata-rata stereotip gender per jurusan"></canvas>
             </div>
           </div>
-          <div class="card fade-in chart-card">
+          <div class="card fade-in chart-card chart-card--compact ranking-card">
             <h2 class="section-title section-title--spaced">Ranking</h2>
             <div id="rankingStereotip"></div>
           </div>
-          <div class="card fade-in chart-card full-width">
+          <div class="card fade-in chart-card chart-card--compact full-width">
             <h2 class="section-title">Perbandingan Kecemasan vs Stereotip</h2>
             <div class="section-desc">Per jurusan</div>
             <div class="chart-frame chart-frame--sm">
@@ -423,16 +426,16 @@
               </div>
             </div>
           </div>
-          <div class="card fade-in chart-card">
+          <div class="card fade-in chart-card chart-card--compact analysis-doughnut-card">
             <h2 class="section-title">Kategori Kecemasan</h2>
             <div class="section-desc">
               Distribusi tingkat kecemasan seluruh partisipan
             </div>
-            <div class="chart-frame chart-frame--md">
+            <div class="chart-frame chart-frame--md analysis-doughnut-frame">
               <canvas id="chartDoughnut" role="img" aria-label="Distribusi kategori kecemasan partisipan"></canvas>
             </div>
           </div>
-          <div class="card fade-in chart-card full-width">
+          <div class="card fade-in chart-card chart-card--compact full-width">
             <h2 class="section-title">Dimensi Stereotip per Jurusan</h2>
             <div class="section-desc">
               Warna lebih gelap = skor lebih tinggi
@@ -440,9 +443,8 @@
             <div class="overflow-x-auto mt-20">
               <div id="heatmapContainer"></div>
             </div>
-            <div id="heatmapLegend"></div>
           </div>
-          <div class="card fade-in chart-card full-width">
+          <div class="card fade-in chart-card chart-card--compact full-width">
             <h2 class="section-title section-title--spaced">
               Rekomendasi
             </h2>

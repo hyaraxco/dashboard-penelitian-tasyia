@@ -4,6 +4,8 @@
  */
 
 function showSection(section) {
+  const targetSection = document.getElementById("section-" + section);
+
   // Hide all sections
   document.querySelectorAll(".content-section").forEach((s) => s.classList.add("hidden"));
   
@@ -12,9 +14,12 @@ function showSection(section) {
     b.classList.remove("btn-tab-active");
     b.classList.add("btn-tab-inactive");
   });
-  
+
+  // Reset fade state only inside tab content so page-level elements stay visible
+  document.querySelectorAll(".content-section .fade-in.visible").forEach((el) => el.classList.remove("visible"));
+
   // Show selected section
-  document.getElementById("section-" + section).classList.remove("hidden");
+  targetSection.classList.remove("hidden");
   
   // Activate selected tab
   const tab = document.getElementById("tab-" + section);
@@ -26,7 +31,7 @@ function showSection(section) {
   
   // Trigger fade-in animations
   setTimeout(() => {
-    document.querySelectorAll(".fade-in").forEach((el) => el.classList.add("visible"));
+    targetSection.querySelectorAll(".fade-in").forEach((el) => el.classList.add("visible"));
   }, 50);
   
   // Animate charts when their tab becomes visible
@@ -35,19 +40,16 @@ function showSection(section) {
       animateChartOnVisible("kecemasan", createKecemasanChart);
       animateChartOnVisible("stereotip", createStereotipChart);
       animateChartOnVisible("grouped", createGroupedChart);
-      setTimeout(forceChartResize, 120);
     }, 200);
   } else if (section === "analysis") {
     setTimeout(() => {
       animateChartOnVisible("kategori", createKategoriChart);
-      setTimeout(forceChartResize, 120);
     }, 200);
   } else if (section === "overview") {
     setTimeout(() => {
       animateChartOnVisible("jurusan", createJurusanChart);
       animateChartOnVisible("radar", createRadarChart);
       animateChartOnVisible("scatter", createScatterChart);
-      setTimeout(forceChartResize, 120);
     }, 200);
   }
 }

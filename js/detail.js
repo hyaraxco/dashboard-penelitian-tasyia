@@ -39,13 +39,13 @@ function renderDetail(p) {
   const leftCol = document.createElement("div");
 
   const nameDiv = document.createElement("div");
-  nameDiv.style.fontSize = "18px";
+  nameDiv.style.fontSize = "1.125rem"; // 18px equivalent
   nameDiv.style.fontWeight = "600";
   nameDiv.textContent = p.nama;
   leftCol.appendChild(nameDiv);
 
   const infoDiv = document.createElement("div");
-  infoDiv.style.fontSize = "13px";
+  infoDiv.style.fontSize = "var(--type-sm)";
   infoDiv.style.color = "var(--text-secondary)";
   infoDiv.style.marginTop = "4px";
   infoDiv.textContent = `${p.jurusan} · ${p.usia} tahun`;
@@ -65,7 +65,7 @@ function renderDetail(p) {
     card.style.borderRadius = "8px";
 
     const labelDiv = document.createElement("div");
-    labelDiv.style.fontSize = "11px";
+    labelDiv.style.fontSize = "var(--type-2xs)";
     labelDiv.style.color = "var(--text-tertiary)";
     labelDiv.style.marginBottom = "4px";
     labelDiv.textContent = label;
@@ -73,7 +73,7 @@ function renderDetail(p) {
 
     const valDiv = document.createElement("div");
     valDiv.className = "mono";
-    valDiv.style.fontSize = "20px";
+    valDiv.style.fontSize = "1.25rem"; // 20px equivalent
     valDiv.style.fontWeight = "700";
     valDiv.style.color = color;
     valDiv.textContent = val.toFixed(2);
